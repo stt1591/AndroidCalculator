@@ -18,6 +18,7 @@ import java.util.*
 class AndroidCalculator : AppCompatActivity(), View.OnClickListener {
 
     lateinit var editText: EditText
+    var flag:Boolean=true
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main,menu)
         return true
@@ -146,8 +147,9 @@ class AndroidCalculator : AppCompatActivity(), View.OnClickListener {
                     "Bad Input!",
                     Toast.LENGTH_SHORT).show()
                 editText.setText(et)
-            } else {
+            } else if(flag){
                 et += "."
+                flag=false
                 editText.setText(et)
             }
             R.id.button_add -> if (et[et.length - 1] == '+' ||
@@ -162,6 +164,7 @@ class AndroidCalculator : AppCompatActivity(), View.OnClickListener {
                 editText.setText(et)
             } else {
                 et += "+"
+                flag=true
                 editText.setText(et)
             }
             R.id.button_sub -> if (et[et.length - 1] == '+' ||
@@ -176,6 +179,7 @@ class AndroidCalculator : AppCompatActivity(), View.OnClickListener {
                 editText.setText(et)
             } else {
                 et += "-"
+                flag=true
                 editText.setText(et)
             }
             R.id.button_mul -> if (et[et.length - 1] == '+' ||
@@ -190,6 +194,7 @@ class AndroidCalculator : AppCompatActivity(), View.OnClickListener {
                 editText.setText(et)
             } else {
                 et += "×"
+                flag=true
                 editText.setText(et)
             }
             R.id.button_div -> if (et[et.length - 1] == '+' ||
@@ -204,6 +209,9 @@ class AndroidCalculator : AppCompatActivity(), View.OnClickListener {
                 editText.setText(et)
             } else {
                 et += "÷"
+
+                flag=true
+
                 editText.setText(et)
             }
             R.id.button_del -> {
@@ -247,8 +255,6 @@ class AndroidCalculator : AppCompatActivity(), View.OnClickListener {
                 var per = et.toDouble()
                 per = per / 100
                 var per1 = "" + per
-                per1 = per1.replace("0+?$".toRegex(), "")
-                per1 = per1.replace("[.]$".toRegex(), "")
                 editText.setText(per1)
             }
             R.id.button_neg -> if (et[0] >= '0' && et[0] <= '9') {
