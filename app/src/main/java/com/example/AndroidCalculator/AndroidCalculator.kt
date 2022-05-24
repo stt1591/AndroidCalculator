@@ -1,10 +1,13 @@
 package com.example.AndroidCalculator
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.EditText
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import com.example.AndroidCalculator.R
@@ -15,6 +18,22 @@ import java.util.*
 class AndroidCalculator : AppCompatActivity(), View.OnClickListener {
 
     lateinit var editText: EditText
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main,menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.main_item->{
+                val intent=Intent(Intent.ACTION_VIEW)
+                intent.data= Uri.parse("https://github.com/stt1591/AndroidCalculator")
+                startActivity(intent)
+            }
+            R.id.exit_item->finish()
+        }
+        return true
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
